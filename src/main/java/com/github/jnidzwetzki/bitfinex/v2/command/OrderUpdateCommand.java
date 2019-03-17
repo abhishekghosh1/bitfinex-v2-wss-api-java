@@ -42,14 +42,15 @@ public class OrderUpdateCommand implements BitfinexOrderCommand {
         if (bitfinexSubmittedOrder.getPriceTrailing() != null) {
             orderJson.put("price_trailing", bitfinexSubmittedOrder.getPriceTrailing().toString());
         }
-        // TODO Implement delta
         if (bitfinexSubmittedOrder.getPriceAuxLimit() != null) {
             orderJson.put("price_aux_limit", bitfinexSubmittedOrder.getPriceAuxLimit().toString());
         }
         if (!bitfinexSubmittedOrder.getOrderFlags().isEmpty()) {
             orderJson.put("flags", bitfinexSubmittedOrder.getCombinedFlags());
         }
-        orderJson.put("cid", bitfinexSubmittedOrder.getClientId());
+        if (bitfinexSubmittedOrder.getDelta() != null) {
+            orderJson.put("delta", bitfinexSubmittedOrder.getDelta().toString());
+        }
         bitfinexSubmittedOrder.getClientGroupId().ifPresent(groupId -> orderJson.put("gid", bitfinexSubmittedOrder.getClientGroupId().get()));
         return "[0, \"on\", null, " + orderJson.toString() + "]";
     }

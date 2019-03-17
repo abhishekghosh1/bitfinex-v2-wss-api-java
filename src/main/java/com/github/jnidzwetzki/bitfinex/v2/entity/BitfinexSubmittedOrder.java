@@ -62,6 +62,11 @@ public class BitfinexSubmittedOrder extends BitfinexNewOrder {
     private BigDecimal priceAverage;
 
     /**
+     *Change of amount
+     */
+    private BigDecimal delta;
+
+    /**
      * If another order caused this order to be placed (OCO) this will be that other order's ID
      */
     private Long parentOrderId;
@@ -169,6 +174,14 @@ public class BitfinexSubmittedOrder extends BitfinexNewOrder {
 
     public void setNotify(boolean notify) {
         this.notify = notify;
+    }
+
+    public BigDecimal getDelta() {
+        return delta;
+    }
+
+    public void setDelta(BigDecimal delta) {
+        this.delta = delta;
     }
 
     @Override
