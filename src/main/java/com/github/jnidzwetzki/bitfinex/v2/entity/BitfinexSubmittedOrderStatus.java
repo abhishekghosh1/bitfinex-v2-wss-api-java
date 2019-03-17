@@ -45,7 +45,7 @@ public enum BitfinexSubmittedOrderStatus {
 
 		// Handle special cases
 		// Case1: INSUFFICIENT BALANCE (G1) was: ACTIVE (note:POSCLOSE), PARTIALLY FILLED
-		if(string.contains(", PARTIALLY FILLED")) {
+		if(string.contains("PARTIALLY FILLED")) {
 			return BitfinexSubmittedOrderStatus.PARTIALLY_FILLED;
 		}
 		throw new IllegalArgumentException("Unable to find order type for: " + string);
