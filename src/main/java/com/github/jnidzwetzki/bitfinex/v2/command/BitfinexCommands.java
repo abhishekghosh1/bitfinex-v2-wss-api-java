@@ -1,5 +1,6 @@
 package com.github.jnidzwetzki.bitfinex.v2.command;
 
+import com.github.jnidzwetzki.bitfinex.v2.entity.BitfinexSubmittedOrder;
 import java.util.Collection;
 
 import com.github.jnidzwetzki.bitfinex.v2.entity.BitfinexNewOrder;
@@ -20,6 +21,10 @@ public final class BitfinexCommands {
 
     public static OrderNewCommand newOrder(BitfinexNewOrder order) {
         return new OrderNewCommand(order);
+    }
+
+    public static OrderUpdateCommand updateOrder(BitfinexSubmittedOrder order) {
+        return new OrderUpdateCommand(order);
     }
 
     public static OrderCancelCommand cancelOrder(long orderId) {

@@ -17,6 +17,7 @@
  *******************************************************************************/
 package com.github.jnidzwetzki.bitfinex.v2.manager;
 
+import com.github.jnidzwetzki.bitfinex.v2.command.OrderUpdateCommand;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -294,6 +295,23 @@ public class OrderManager extends SimpleCallbackManager<BitfinexSubmittedOrder> 
 		logger.info("Executing new order {}", order);
 		final OrderNewCommand orderNewCommand = new OrderNewCommand(order);
 		client.sendCommand(orderNewCommand);
+	}
+
+	/**
+	 * Place an updated order
+	 * @throws BitfinexClientException
+	 */
+	public void updateOrder(final BitfinexSubmittedOrder order) throws BitfinexClientException {
+
+		final BitfinexApiKeyPermissions capabilities = client.getApiKeyPermissions();
+
+		if(! capabilities.isOrderWritePermission()) {
+			throw new BitfinexClientException("Unable to place order " + order + " connection has not enough capabilities: " + capabilities);
+		}
+
+		logger.info("Executing update order {}", order);
+		final OrderUpdateCommand orderUpdateCommand = new OrderUpdateCommand(order);
+		client.sendCommand(orderUpdateCommand);
 	}
 
 	/**
