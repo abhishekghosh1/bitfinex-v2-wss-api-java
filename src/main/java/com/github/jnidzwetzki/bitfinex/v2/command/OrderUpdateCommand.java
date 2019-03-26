@@ -52,7 +52,7 @@ public class OrderUpdateCommand implements BitfinexOrderCommand {
             orderJson.put("delta", bitfinexSubmittedOrder.getDelta().toString());
         }
         bitfinexSubmittedOrder.getClientGroupId().ifPresent(groupId -> orderJson.put("gid", bitfinexSubmittedOrder.getClientGroupId().get()));
-        return "[0, \"on\", null, " + orderJson.toString() + "]";
+        return "[0, \"ou\", null, " + orderJson.toString() + "]";
     }
 
 }
