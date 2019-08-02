@@ -59,13 +59,15 @@ public class BitfinexCurrencyPair implements BitfinexInstrument {
 				final String pair = currency.getString("pair");
 
 				if(pair.length() != 6) {
-					throw new BitfinexClientException("The currency pair is not 6 chars long: " + pair);
+					//throw new BitfinexClientException("The currency pair is not 6 chars long: " + pair); // TODO: fixme later
+				}
+				if(pair.length() == 6) {
+					final double minOrderSize = currency.getDouble("minimum_order_size");
+					final String currency1 = pair.substring(0, 3).toUpperCase();
+					final String currency2 = pair.substring(3, 6).toUpperCase();
+					register(currency1, currency2, minOrderSize);
 				}
 
-				final double minOrderSize = currency.getDouble("minimum_order_size");
-				final String currency1 = pair.substring(0, 3).toUpperCase();
-				final String currency2 = pair.substring(3, 6).toUpperCase();
-				register(currency1, currency2, minOrderSize);
 			}
 
 		} catch (IOException e) {
